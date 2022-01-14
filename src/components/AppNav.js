@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom'
 const useStyles = makeStyles((theme) => ({
     //This is not working added style prop to <AppBar/>
     // AppBar: {
-    //     backgroundColor: "pink",
+    //     background: "pink",
     // },
     link: {
         textDecoration: "none",
