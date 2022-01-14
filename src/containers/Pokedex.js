@@ -1,12 +1,26 @@
 import React, { useEffect, useState } from 'react'
-import { Box, CircularProgress } from '@mui/material'
+import { Box, CircularProgress, Grid } from '@mui/material'
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import axios from 'axios'
 import { IMAGE_API_URL, POKEMON_API_URL } from '../config'
+import PokemonCard from '../components/PokemonCard'
+
+const theme = createTheme({
+    components: {
+      MuiGrid: {
+        styleOverrides: {
+            root: {
+                textAlign: "center",
+                padding: "70px 10px 0px 10px",
+                backgroundColor: "#852019"
+            },
+      },
+      },
+      },
+  });
 
 export default function Pokedex() {
-    let a
-    const [pokemonDataState, setPokemonDataState] = useState([])
-    console.log('pokemonDataState', pokemonDataState)
+    const [pokemonDataState, setPokemonDataState] = useState(null)
     useEffect(() => {
         axios.get(`${POKEMON_API_URL}?limit=800`).then((response) => {
             if(response.status >= 200 && response.status < 300){
@@ -27,11 +41,17 @@ export default function Pokedex() {
     }, [])
     return (
         <>
+        <ThemeProvider theme={theme}>
         <Box>
-            {pokemonDataState ? pokemonDataState.map((pokemon) => {
-                return <h1 key={pokemon.id}>{pokemon.name}</h1>
-            }) : <CircularProgress style={{marginTop: 100 }}/>}
+            {pokemonDataState ? (
+            <Grid container spacing={2}>
+            {pokemonDataState.map((pokemon) => {
+                return <PokemonCard pokemon={pokemon} image={pokemon.url} key={pokemon.id}/>
+            })} 
+            </Grid>
+            ) : (<CircularProgress style={{marginTop: 100 }}/>)}
         </Box>
+        </ThemeProvider>
         </>
     )
 }
