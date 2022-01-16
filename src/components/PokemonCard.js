@@ -3,6 +3,7 @@ import React from 'react'
 import { makeStyles } from '@mui/styles'
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 const theme = createTheme({
   components: {
@@ -38,6 +39,7 @@ export default function PokemonCard(props) {
     return (
     <ThemeProvider theme={theme}>
         <Grid item xs={12} sm={2}>
+         <Link to={"/pokemon/" + id} style={{textDecoration: 'none'}}>
             <Card >
                 <CardMedia  image={image}></CardMedia>
                 <CardContent>
@@ -46,6 +48,7 @@ export default function PokemonCard(props) {
                     </Typography>
                 </CardContent>
             </Card>
+         </Link>
         </Grid>
     </ThemeProvider>
     )
