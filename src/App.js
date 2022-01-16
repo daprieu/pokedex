@@ -2,6 +2,7 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import AppNav from './components/AppNav'
 import Pokedex from './containers/Pokedex'
+import PokemonDetails from './containers/PokemonDetails'
 
 
 export default function App() {
@@ -9,7 +10,8 @@ export default function App() {
     <Router>
         <AppNav/>
       <Routes>
-      <Route path="/" element={<Pokedex/>}/>
+      <Route exact path="/" element={<Pokedex/>}/>
+      <Route exact path="/pokemon/:pokemonId" element={<PokemonDetails/>}></Route>
       </Routes>
     </Router>
   )
